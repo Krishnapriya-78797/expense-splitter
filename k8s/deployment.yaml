@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expense-splitter
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: expense-splitter
+  template:
+    metadata:
+      labels:
+        app: expense-splitter
+    spec:
+      containers:
+      - name: app
+        image: expense-splitter:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
+        volumeMounts:
+        - name: db-storage
+          mountPath: /app/instance
+      volumes:
+      - name: db-storage
+        emptyDir: {}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Balances</h2>
+<table class="table">
+    <thead><tr><th>User</th><th>Balance</th></tr></thead>
+    <tbody>
+    {% for b in balances %}
+        <tr><td>{{ b['name'] }}</td><td class="{{ 'text-success' if b['balance'] > 0 else 'text-danger' }}">₹{{ b['balance']|round(2) }}</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+<h3>Who owes whom</h3>
+<ul>
+    {% for debt in debts %}<li>{{ debt }}</li>{% endfor %}
+</ul>
+{% endblock %}
